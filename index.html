@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Chesa 😬</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #fddb92, #d1fdff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        width: 90%;
+        max-width: 420px;
+        padding: 25px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        animation: pop 0.8s ease;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+        color: #e76f51;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .emoji {
+        font-size: 50px;
+        margin: 15px 0;
+        animation: wobble 1s infinite;
+    }
+
+    @keyframes wobble {
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+    }
+
+    .buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    button {
+        padding: 14px 22px;
+        font-size: 16px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        transition: transform 0.2s;
+    }
+
+    #yesBtn {
+        background: #2a9d8f;
+        color: white;
+    }
+
+    #noBtn {
+        background: #e63946;
+        color: white;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Chesa, I messed up 😬</h1>
+
+    <div class="emoji">🙇‍♂️</div>
+
+    <p>
+        I admit it.  
+        That was dumb.  
+        Please forgive me so this page stops being dramatic.
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn">Okay, I forgive you 😎</button>
+        <button id="noBtn">No 😑</button>
+    </div>
+
+    <p id="thanksMsg" class="hidden">
+        YESSS 😄  
+        Forgiveness unlocked.  
+        You are officially awesome.
+    </p>
+</div>
+
+<script>
+    let forgiven = false;
+    let noScale = 1;
+
+    // Prevent page close until forgiven
+    window.addEventListener("beforeunload", function (e) {
+        if (!forgiven) {
+            e.preventDefault();
+            e.returnValue = "You can’t leave yet… Chesa hasn’t forgiven me 😢";
+            return e.returnValue;
+        }
+    });
+
+    document.getElementById("yesBtn").addEventListener("click", function () {
+        forgiven = true;
+        document.getElementById("thanksMsg").classList.remove("hidden");
+        this.innerText = "Forgiven 😄";
+        document.getElementById("noBtn").style.display = "none";
+
+        setTimeout(() => {
+            alert("Page unlocked. You are free now 😌");
+        }, 500);
+    });
+
+    document.getElementById("noBtn").addEventListener("click", function () {
+        noScale -= 0.15;
+
+        if (noScale <= 0.2) {
+            this.innerText = "okay okay 😭";
+        }
+
+        this.style.transform = `scale(${noScale})`;
+    });
+</script>
+
+</body>
+</html>
